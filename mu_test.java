@@ -60,6 +60,7 @@ public class mu_test implements Runnable {
             val ++;
 
             String con = "";
+            con = "false";
 
             if ((val % 2) == 1)
 
@@ -69,8 +70,11 @@ public class mu_test implements Runnable {
 
                 con = "true";
 
-            String path = "http://192.168.99.104:666/~/mn-cse/mn-name/AE1/Color_Container";
-
+            // String path = "http://192.168.99.110:666/~/mn-cse/mn-name/AE1/RFID_Container_for_stage2";
+            // String path = "http://192.168.99.110:1111/test";
+            // String path = "http://192.168.99.110:2222/test";
+            // String path = "http://192.168.99.110:666/~/mn-cse/mn-name/AE1/Defective_Product_Container";
+            String path = "http://192.168.99.110:777/~/mn-cse/mn-name/AE2/Robot_Arm_Status_Container";
             URL url = new URL(path);
 
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
@@ -93,12 +97,14 @@ public class mu_test implements Runnable {
 
 
 
-                String request = "{\"m2m:cin\": {\"con\": \"" + con
+                // String request = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><m2m:sgn xmlns:m2m=\"http://www.onem2m.org/xml/protocols\"><nev><rep rn=\"" + val +"\"><con>hello world</con></rep><rss>1</rss></nev><sud>false</sud><sur>/in-cse/in-name/MY_SENSOR/DATA/SUB_MY_SENSOR</sur></m2m:sgn>";
+                // String request = "{\"m2m:cin\": {\"con\": \"" + con
 
-                        + "\", \"cnf\": \"application/xml\",\"lbl\":\"req\",\"rn\":\"" + val + "\"}}";
-
+                //         + "\", \"cnf\": \"application/xml\",\"lbl\":\"req\",\"rn\":\"" + val + "\"}}";
                 // '{"m2m:cin": {"con": "EXAMPLE_VALUE", "cnf": "text/plain:0"}}'
 
+                String request = "{\"m2m:cin\": {\"con\": \"" + con
+                + "\", \"cnf\": \"application/xml\",\"lbl\":\"req\",\"rn\":\"" + val + "\"}}";
                 out.write(request.toString().getBytes("UTF-8"));
 
                 out.flush();
@@ -107,7 +113,7 @@ public class mu_test implements Runnable {
 
                 int satus = http.getResponseCode();
 
-                // System.out.println(satus);
+                System.out.println(satus);
 
                 // System.out.println(path);
 
@@ -290,7 +296,7 @@ public class mu_test implements Runnable {
 
     public static void main(String[] args) {
 
-        send_req(50.0, "50s", 60);
+        send_req(1, "50s", 60);
 
 
 
